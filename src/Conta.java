@@ -8,6 +8,8 @@ public abstract class Conta implements IConta {
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
+	protected boolean bloqueada;
+	protected double fatura;
 
 	public Conta(Cliente cliente) {
 		this.agencia = Conta.AGENCIA_PADRAO;
@@ -31,6 +33,27 @@ public abstract class Conta implements IConta {
 		contaDestino.depositar(valor);
 	}
 
+	@Override
+	public void bloquearConta() {
+		bloqueada = true;
+	}
+
+	@Override
+	public void desbloquearConta() {
+		bloqueada = false;
+	}
+
+	@Override
+	public void pagarFatura(double valor) {
+		saldo -= valor;
+		fatura -= valor;
+	}
+
+	@Override
+	public void comprarNoCredito(double valor) {
+		fatura += valor;
+	}
+
 	public int getAgencia() {
 		return agencia;
 	}
@@ -41,6 +64,10 @@ public abstract class Conta implements IConta {
 
 	public double getSaldo() {
 		return saldo;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	protected void imprimirInfosComuns() {

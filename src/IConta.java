@@ -1,3 +1,4 @@
+import java.util.Map;
 
 public interface IConta {
 	
@@ -8,4 +9,14 @@ public interface IConta {
 	void transferir(double valor, IConta contaDestino);
 	
 	void imprimirExtrato();
+
+	void bloquearConta();
+
+	void desbloquearConta();
+
+	void emitirCartao();
+
+	void pagarFatura(double valor);
+
+	void comprarNoCredito(double valor);
 }
